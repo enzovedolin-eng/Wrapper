@@ -26,7 +26,7 @@ app.post("/calcular", (req, res) => {
     }
 
     // TODO 4: calcule total = preco * quantidade
-    const subtotal = preco * quantity; // Note que a variável original estava como quantidade
+    const subtotal = preco * quantidade; // Note que a variável original estava como quantidade
     const desconto = subtotal * (percentualDesconto / 100);
     const total = subtotal - desconto;
 
