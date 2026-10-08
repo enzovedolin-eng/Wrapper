@@ -1,16 +1,16 @@
-// Frontend pronto — NÃO precisa alterar.
-// Ele envia os campos (como texto) para o backend POST /calcular.
+// Envia os campos do formulario como texto para o backend POST /calcular.
 const btn = document.getElementById("btn");
 const res = document.getElementById("resultado");
 
 btn.addEventListener("click", async () => {
   const preco = document.getElementById("preco").value;
   const quantidade = document.getElementById("quantidade").value;
+  const percentualdesconto = document.getElementById("percentualdesconto").value;
 
   const resp = await fetch("/calcular", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ preco, quantidade }),
+    body: JSON.stringify({ preco, quantidade, percentualdesconto }),
   });
   const dados = await resp.json();
 
@@ -20,5 +20,9 @@ btn.addEventListener("click", async () => {
     return;
   }
   res.className = "resultado ok";
-  res.textContent = `Total: R$ ${dados.total.toFixed(2)}`;
+  res.textContent = `Subtotal: R$ ${dados.subtotal.toFixed(2)} | Desconto: R$ ${dados.desconto.toFixed(2)} | Total: R$ ${dados.total.toFixed(2)}`;
 });
+
+
+
+
