@@ -17,14 +17,18 @@ app.post("/calcular", (req, res) => {
   const preco = Number(req.body.preco);
   // TODO 2: converta req.body.quantidade para inteiro com parseInt(...)
   const quantidade = parseInt(req.body.quantidade);
+  const percentualDesconto = Number(req.body.desconto);
   // TODO 3: se algum for NaN, responda 400 com { erro: "Digite numeros validos" }
   if (isNaN(preco) || isNaN(quantidade)) {
     return res.status(400).json({ erro: "Digite numeros validos" });
   }
   // TODO 4: calcule total = preco * quantidade
-  const total = preco * quantidade;
+  const subtotal = preco * quantidade;
+  const desconto = subtotal * (percentualDesconto / 100);
+  const total = subtotal - desconto;
   // TODO 5: responda 200 com { preco, quantidade, total }
-  res.status(200).json({ preco, quantidade, total });
+  res.status(200).json({ subtotal, desconto, total, tipo: typeof total });
+
 });
 
 app.listen(PORT, () => {
